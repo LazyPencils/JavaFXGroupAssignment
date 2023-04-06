@@ -8,12 +8,14 @@ public class Book {
     private String author;
     private int year;
     private String genre;
+    private boolean selected;
 
     public Book(String title, String author, int year, String genre) {
         this.title = title;
         this.author = author;
         this.year = year;
         this.genre = genre;
+        selected = true;
     }
 
     public String getTitle() {
@@ -52,6 +54,14 @@ public class Book {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public boolean getSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 
     public StringProperty titleProperty() {

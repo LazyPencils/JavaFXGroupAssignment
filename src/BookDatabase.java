@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 public class BookDatabase extends Application {
 
-    private TableView<Book> table = new TableView<>();
+   
 
     public static void main(String[] args) {
         launch(args);
@@ -52,8 +52,9 @@ public class BookDatabase extends Application {
         searchBox.setPadding(new Insets(10, 10, 10, 10));
 
         // Table
+        TableView<Book> table = new TableView<>();
         TableColumn<Book, Boolean> selectColumn = new TableColumn<>("Select");
-        selectColumn.setCellValueFactory(new PropertyValueFactory<>("selected"));
+        selectColumn.setCellValueFactory(new PropertyValueFactory<>("Selected"));
         selectColumn.setCellFactory(column -> new CheckBoxTableCell<>());
 
         TableColumn<Book, String> titleColumn = new TableColumn<>("Title");
@@ -69,6 +70,8 @@ public class BookDatabase extends Application {
         genreColumn .setCellValueFactory(cellData -> cellData.getValue().genreProperty());
 
         table.getColumns().addAll(titleColumn, authorColumn, yearColumn, genreColumn);
+
+        table.getItems().add(new Book("example", "Example", 1999, "Non-fiction"));
 
         // Layout
         BorderPane borderPane = new BorderPane();
