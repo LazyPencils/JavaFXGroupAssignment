@@ -1,5 +1,4 @@
 import java.awt.BorderLayout;
-
 import javafx.application.Application;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -71,6 +70,7 @@ public class BookDatabase extends Application {
 
         table.getColumns().addAll(titleColumn, authorColumn, yearColumn, genreColumn);
 
+        // Add example Book object to table
         table.getItems().add(new Book("example", "Example", 1999, "Non-fiction"));
 
         // Layout
