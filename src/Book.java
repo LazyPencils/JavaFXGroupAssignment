@@ -16,7 +16,6 @@ public class Book {
         this.genre = genre;
     }
 
-   
     public String getTitle() {
         return title;
     }

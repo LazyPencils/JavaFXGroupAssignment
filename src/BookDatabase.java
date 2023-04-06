@@ -11,6 +11,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -50,6 +52,10 @@ public class BookDatabase extends Application {
         searchBox.setPadding(new Insets(10, 10, 10, 10));
 
         // Table
+        TableColumn<Book, Boolean> selectColumn = new TableColumn<>("Select");
+        selectColumn.setCellValueFactory(new PropertyValueFactory<>("selected"));
+        selectColumn.setCellFactory(column -> new CheckBoxTableCell<>());
+
         TableColumn<Book, String> titleColumn = new TableColumn<>("Title");
         titleColumn.setCellValueFactory(cellData -> cellData.getValue().titleProperty());
 
