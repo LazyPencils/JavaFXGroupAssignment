@@ -68,7 +68,7 @@ public class BookDatabase extends Application {
         TableColumn<Book, String> genreColumn = new TableColumn<>("Genres");
         genreColumn .setCellValueFactory(cellData -> cellData.getValue().genreProperty());
 
-        table.getColumns().addAll(titleColumn, authorColumn, yearColumn, genreColumn);
+        table.getColumns().addAll(selectColumn, titleColumn, authorColumn, yearColumn, genreColumn);
 
         // Add example Book object to table
         table.getItems().add(new Book("example", "Example", 1999, "Non-fiction"));
