@@ -20,9 +20,6 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class BookDatabase extends Application {
-
-   
-
     public static void main(String[] args) {
         launch(args);
     }
@@ -57,7 +54,10 @@ public class BookDatabase extends Application {
         // Table
         TableView<Book> table = new TableView<>();
         
+        // Toggleable select checkboxes column
         TableColumn selectColumn = new TableColumn("Select");
+
+        // This allows the cell to be edited by the user clicking on the select checkboxes displayed in TableView.
         selectColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Book, CheckBox>, ObservableValue<CheckBox>>() {
             
             @Override
@@ -78,24 +78,29 @@ public class BookDatabase extends Application {
 
         });
 
+        // Column for Book Titles
         TableColumn<Book, String> titleColumn = new TableColumn<>("Title");
         titleColumn.setCellValueFactory(cellData -> cellData.getValue().titleProperty());
 
+        // Column for Author Names.
         TableColumn<Book, String> authorColumn = new TableColumn<>("Author");
         authorColumn.setCellValueFactory(cellData -> cellData.getValue().authorProperty());
 
+        // Column for the Book's Year of Release
         TableColumn<Book, Integer> yearColumn = new TableColumn<>("Year");
         yearColumn.setCellValueFactory(cellData -> cellData.getValue().yearProperty().asObject());
 
+        // Column for the Book's Genre
         TableColumn<Book, String> genreColumn = new TableColumn<>("Genres");
         genreColumn .setCellValueFactory(cellData -> cellData.getValue().genreProperty());
 
+        // Add all columns to the TableView instance
         table.getColumns().addAll(selectColumn, titleColumn, authorColumn, yearColumn, genreColumn);
 
-        // Add example Book object to table
+        // Adds example Book object to table
         table.getItems().add(new Book("example", "Example", 1999, "Non-fiction"));
 
-        // Layout
+        // Layout for JavaFX App
         BorderPane borderPane = new BorderPane();
         borderPane.setTop(buttonBar);
         borderPane.setCenter(table);
