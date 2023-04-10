@@ -2,8 +2,11 @@ import java.awt.BorderLayout;
 import javafx.application.Application;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
@@ -14,6 +17,7 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class BookDatabase extends Application {
 
@@ -52,9 +56,27 @@ public class BookDatabase extends Application {
 
         // Table
         TableView<Book> table = new TableView<>();
-        TableColumn<Book, Boolean> selectColumn = new TableColumn<>("Select");
-        selectColumn.setCellValueFactory(new PropertyValueFactory<>("Selected"));
-        selectColumn.setCellFactory(column -> new CheckBoxTableCell<>());
+        
+        TableColumn selectColumn = new TableColumn("Select");
+        selectColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Book, CheckBox>, ObservableValue<CheckBox>>() {
+            
+            @Override
+            public ObservableValue<CheckBox> call(TableColumn.CellDataFeatures<Book, CheckBox> arg0) {
+                Book book = arg0.getValue();
+                CheckBox checkBox = new CheckBox();
+                checkBox.selectedProperty().setValue(book.getSelected());
+
+                checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+
+                    public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
+                        book.setSelected(new_val);
+                    }
+                    
+                });
+                return new SimpleObjectProperty<CheckBox>(checkBox);
+            }
+
+        });
 
         TableColumn<Book, String> titleColumn = new TableColumn<>("Title");
         titleColumn.setCellValueFactory(cellData -> cellData.getValue().titleProperty());
