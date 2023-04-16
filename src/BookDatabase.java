@@ -37,6 +37,7 @@ public class BookDatabase extends Application {
         Button openBook = new Button("Open Book");
         Button editBook = new Button("Edit Book");
         
+        // Left justify buttons 
         buttonBar.getButtons().addAll(newBook, openBook, deleteBook, editBook);
         ButtonBar.setButtonData(newBook, ButtonData.LEFT);
         ButtonBar.setButtonData(deleteBook, ButtonData.LEFT);
