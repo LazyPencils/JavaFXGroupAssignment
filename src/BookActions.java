@@ -1,5 +1,7 @@
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
@@ -71,6 +73,7 @@ public class BookActions {
     dialog.showAndWait();
   }
 
+  @FXML
   public static void deleteSelectedBooks(TableView<Book> table) {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Delete Book");
@@ -81,13 +84,20 @@ public class BookActions {
       .showAndWait()
       .ifPresent(response -> {
         if (response == ButtonType.OK) {
-          ObservableList<Book> books = table.getItems();
-          for (Book book : books) {
+          
+          // List of all the books and the books that are to be deleted
+          ObservableList<Book> bookList = table.getItems();
+          ObservableList<Book> removeBooks = FXCollections.observableArrayList();
+
+          // Adds a book to the delete list depending on if the checkbox is selected
+          for (Book book : bookList) {
             if (book.getSelected()) {
-              books.remove(book);
-              break;
+              removeBooks.add(book);
             }
           }
+
+          // Removes books based off referencing the removeBooks list.
+          bookList.removeAll(removeBooks);
         }
       });
   }
