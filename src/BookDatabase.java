@@ -53,6 +53,10 @@ public class BookDatabase extends Application {
       BookActions.deleteSelectedBooks(table);
     });
 
+    openBook.setOnAction(e -> {
+      BookActions.openBook(table);
+  });
+  
     buttonBar.getButtons().addAll(newBook, openBook, deleteBook, editBook);
     ButtonBar.setButtonData(newBook, ButtonData.LEFT);
     ButtonBar.setButtonData(deleteBook, ButtonData.LEFT);
