@@ -1,6 +1,5 @@
 import java.awt.BorderLayout;
 import java.util.ArrayList;
-
 import javafx.application.Application;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -44,7 +43,8 @@ public class BookDatabase extends Application {
     Button openBook = new Button("Open Book");
     Button editBook = new Button("Edit Book");
 
-    // Add actions for buttons
+    // Add actions for buttons 
+    // Button Logic by Manh Phu, Zohair and Nabil
     newBook.setOnAction(e -> {
       BookActions.addBook(table);
     });
@@ -55,6 +55,10 @@ public class BookDatabase extends Application {
 
     openBook.setOnAction(e -> {
       BookActions.openBook(table);
+  });
+
+    editBook.setOnAction(e -> {
+      BookActions.editSelectedBook(table); 
   });
   
     buttonBar.getButtons().addAll(newBook, openBook, deleteBook, editBook);
